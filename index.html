@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retro TV Graphic with Calendar</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: black; /* Pink background */
+  }
+  .tv {
+    width: px;
+    height: px;
+    background-color: pink; /* TV body color */
+    position: relative;
+    margin: 100px auto;
+    border-radius: 20px;
+    border: 20px solid #bea47f; /* TV body border */
+  }
+  .antenna {
+    width: 20px;
+    height: 100px;
+    background-color: #bea47f; /* Antenna color */
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  .antenna-base {
+    width: 40px;
+    height: 20px;
+    background-color: #bea47f; /* Antenna base color */
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 10px;
+  }
+</style>
+</head>
+<body>
+<div class="tv">
+  <div class="screen"></div>
+  <div class="antenna"></div>
+  <div class="antenna-base"></div>
+  <div class="calendar-container">
+</div>
+
+</body>
+</html>
+  <div class="calendar-container">
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shifting Calendar</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: pink;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150vh;
+  }
+  .calendar {
+    background-color: pink;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+  }
+  table {
+    width: 20%;
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  th {
+    background-color: #ffccff;
+  }
+  td {
+    cursor: pointer;
+  }
+  .star {
+    color: white;
+    font-size: 20px;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="calendar">
+  <h2>Shifting Calendar</h2>
+  <h3 id="monthName"></h3>
+  <table id="calendarTable">
+    <thead>
+      <tr>
+        <th>Sun</th>
+        <th>Mon</th>
+        <th>Tue</th>
+        <th>Wed</th>
+        <th>Thu</th>
+        <th>Fri</th>
+        <th>Sat</th>
+      </tr>
+    </thead>
+    <tbody id="calendarBody">
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+
+
+
+
+<script>
+  // Function to generate the calendar
+  function generateCalendar(year, month) {
+    const startDate = new Date(year, month, 1);
+    const endDate = new Date(year, month + 1, 0);
+    const daysInMonth = endDate.getDate();
+
+    document.getElementById('monthName').innerText = startDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+    let calendarBody = '';
+    let dayOfWeek = startDate.getDay();
+
+    calendarBody += '<tr>';
+
+    // Fill in empty cells for previous month
+    for (let i = 0; i < dayOfWeek; i++) {
+      calendarBody += '<td></td>';
+    }
+
+    // Fill in days of the month
+    for (let day = 1; day <= daysInMonth; day++) {
+      calendarBody += '<td onclick="toggleStar(this)">' + day + '<span class="star" style="display:none;">★</span></td>';
+      if (++dayOfWeek === 7) {
+        calendarBody += '</tr>';
+        if (day < daysInMonth) {
+          calendarBody += '<tr>';
+        }
+        dayOfWeek = 0;
+      }
+    }
+
+    // Fill in empty cells for next month
+    if (dayOfWeek > 0) {
+      for (let i = dayOfWeek; i < 7; i++) {
+        calendarBody += '<td></td>';
+      }
+    }
+
+    document.getElementById('calendarBody').innerHTML = calendarBody;
+  }
+
+  // Function to toggle star on day click
+  function toggleStar(cell) {
+    const star = cell.querySelector('.star');
+    star.style.display = (star.style.display === 'none') ? 'inline' : 'none';
+  }
+
+  // Generate calendar for current month
+  const currentDate = new Date();
+  generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+</script>
+
+</body>
+</html>
+  </div>
+</div>
+
+</body>
+</html>
+
